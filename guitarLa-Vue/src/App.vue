@@ -1,8 +1,8 @@
 <script setup>
 import { db } from './data/guitarras'
-import { ref } from 'vue';
-import { onMounted } from 'vue';
-// import { reactive } from 'vue';
+import { onMounted, ref } from 'vue';
+import Guitarra from './components/Guitarra.vue';
+// import { onMounted } from 'vue';
 
 // Reactive siempre es un objeto
 /**
@@ -18,16 +18,24 @@ import { onMounted } from 'vue';
 
 
 //EJEMPLO DE REf
-const guitarras = ref([]);
-console.log(guitarras.value);
+// const guitar = ref([]);
 
+// onMounted(() => {
+//   guitar.value = db;
+//   console.log('componente listo');
+// })
 
-
-
+const guitarras = ref([])
 
 onMounted(() => {
-  guitarras.value = db;
+  guitarras.value = db
 })
+
+const incrementar = () => {
+  console.log('agregando...');
+}
+
+
 </script>
 
 <template>
@@ -108,156 +116,8 @@ onMounted(() => {
     <h2 class="text-center">Nuestra Colección</h2>
 
     <div class="row mt-5">
-      <div class="col-md-6 col-lg-4 my-4 row align-items-center">
-        <div class="col-4">
-          <img class="img-fluid" src="/img/guitarra_01.jpg" alt="imagen guitarra">
-        </div>
-        <div class="col-8">
-          <h3 class="text-black fs-4 fw-bold text-uppercase">Lukather</h3>
-          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit quae labore odit magnam in autem nesciunt, amet
-            deserunt</p>
-          <p class="fw-black text-primary fs-3">$299</p>
-          <button type="button" class="btn btn-dark w-100 ">Agregar al Carrito</button>
-        </div>
-      </div><!-- FIN GUITARRA -->
-
-      <div class="col-md-6 col-lg-4 my-4 row align-items-center">
-        <div class="col-4">
-          <img class="img-fluid" src="/img/guitarra_02.jpg" alt="imagen guitarra">
-        </div>
-        <div class="col-8">
-          <h3 class="text-black fs-4 fw-bold text-uppercase">SRV</h3>
-          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit quae labore odit magnam in autem nesciunt, amet
-            deserunt</p>
-          <p class="fw-black text-primary fs-3">$299</p>
-          <button type="button" class="btn btn-dark w-100 ">Agregar al Carrito</button>
-        </div>
-      </div><!-- FIN GUITARRA -->
-
-      <div class="col-md-6 col-lg-4 my-4 row align-items-center">
-        <div class="col-4">
-          <img class="img-fluid" src="/img/guitarra_03.jpg" alt="imagen guitarra">
-        </div>
-        <div class="col-8">
-          <h3 class="text-black fs-4 fw-bold text-uppercase">Borland</h3>
-          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit quae labore odit magnam in autem nesciunt, amet
-            deserunt</p>
-          <p class="fw-black text-primary fs-3">$299</p>
-          <button type="button" class="btn btn-dark w-100 ">Agregar al Carrito</button>
-        </div>
-      </div><!-- FIN GUITARRA -->
-
-      <div class="col-md-6 col-lg-4 my-4 row align-items-center">
-        <div class="col-4">
-          <img class="img-fluid" src="/img/guitarra_04.jpg" alt="imagen guitarra">
-        </div>
-        <div class="col-8">
-          <h3 class="text-black fs-4 fw-bold text-uppercase">Vai</h3>
-          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit quae labore odit magnam in autem nesciunt, amet
-            deserunt</p>
-          <p class="fw-black text-primary fs-3">$299</p>
-          <button type="button" class="btn btn-dark w-100 ">Agregar al Carrito</button>
-        </div>
-      </div><!-- FIN GUITARRA -->
-
-      <div class="col-md-6 col-lg-4 my-4 row align-items-center">
-        <div class="col-4">
-          <img class="img-fluid" src="/img/guitarra_05.jpg" alt="imagen guitarra">
-        </div>
-        <div class="col-8">
-          <h3 class="text-black fs-4 fw-bold text-uppercase">Thompson</h3>
-          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit quae labore odit magnam in autem nesciunt, amet
-            deserunt</p>
-          <p class="fw-black text-primary fs-3">$299</p>
-          <button type="button" class="btn btn-dark w-100 ">Agregar al Carrito</button>
-        </div>
-      </div><!-- FIN GUITARRA -->
-
-      <div class="col-md-6 col-lg-4 my-4 row align-items-center">
-        <div class="col-4">
-          <img class="img-fluid" src="/img/guitarra_06.jpg" alt="imagen guitarra">
-        </div>
-        <div class="col-8">
-          <h3 class="text-black fs-4 fw-bold text-uppercase">White</h3>
-          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit quae labore odit magnam in autem nesciunt, amet
-            deserunt</p>
-          <p class="fw-black text-primary fs-3">$299</p>
-          <button type="button" class="btn btn-dark w-100 ">Agregar al Carrito</button>
-        </div>
-      </div><!-- FIN GUITARRA -->
-
-      <div class="col-md-6 col-lg-4 my-4 row align-items-center">
-        <div class="col-4">
-          <img class="img-fluid" src="/img/guitarra_07.jpg" alt="imagen guitarra">
-        </div>
-        <div class="col-8">
-          <h3 class="text-black fs-4 fw-bold text-uppercase">Cobain</h3>
-          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit quae labore odit magnam in autem nesciunt, amet
-            deserunt</p>
-          <p class="fw-black text-primary fs-3">$299</p>
-          <button type="button" class="btn btn-dark w-100 ">Agregar al Carrito</button>
-        </div>
-      </div><!-- FIN GUITARRA -->
-      <div class="col-md-6 col-lg-4 my-4 row align-items-center">
-        <div class="col-4">
-          <img class="img-fluid" src="/public/img/guitarra_08.jpg" alt="imagen guitarra">
-        </div>
-        <div class="col-8">
-          <h3 class="text-black fs-4 fw-bold text-uppercase">Dale</h3>
-          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit quae labore odit magnam in autem nesciunt, amet
-            deserunt</p>
-          <p class="fw-black text-primary fs-3">$299</p>
-          <button type="button" class="btn btn-dark w-100 ">Agregar al Carrito</button>
-        </div>
-      </div><!-- FIN GUITARRA -->
-      <div class="col-md-6 col-lg-4 my-4 row align-items-center">
-        <div class="col-4">
-          <img class="img-fluid" src="/img/guitarra_09.jpg" alt="imagen guitarra">
-        </div>
-        <div class="col-8">
-          <h3 class="text-black fs-4 fw-bold text-uppercase">Krieger</h3>
-          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit quae labore odit magnam in autem nesciunt, amet
-            deserunt</p>
-          <p class="fw-black text-primary fs-3">$299</p>
-          <button type="button" class="btn btn-dark w-100 ">Agregar al Carrito</button>
-        </div>
-      </div><!-- FIN GUITARRA -->
-      <div class="col-md-6 col-lg-4 my-4 row align-items-center">
-        <div class="col-4">
-          <img class="img-fluid" src="/img/guitarra_10.jpg" alt="imagen guitarra">
-        </div>
-        <div class="col-8">
-          <h3 class="text-black fs-4 fw-bold text-uppercase">Campbell</h3>
-          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit quae labore odit magnam in autem nesciunt, amet
-            deserunt</p>
-          <p class="fw-black text-primary fs-3">$299</p>
-          <button type="button" class="btn btn-dark w-100 ">Agregar al Carrito</button>
-        </div>
-      </div><!-- FIN GUITARRA -->
-      <div class="col-md-6 col-lg-4 my-4 row align-items-center">
-        <div class="col-4">
-          <img class="img-fluid" src="/img/guitarra_11.jpg" alt="imagen guitarra">
-        </div>
-        <div class="col-8">
-          <h3 class="text-black fs-4 fw-bold text-uppercase">Reed</h3>
-          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit quae labore odit magnam in autem nesciunt, amet
-            deserunt</p>
-          <p class="fw-black text-primary fs-3">$299</p>
-          <button type="button" class="btn btn-dark w-100 ">Agregar al Carrito</button>
-        </div>
-      </div><!-- FIN GUITARRA -->
-      <div class="col-md-6 col-lg-4 my-4 row align-items-center">
-        <div class="col-4">
-          <img class="img-fluid" src="/img/guitarra_12.jpg" alt="imagen guitarra">
-        </div>
-        <div class="col-8">
-          <h3 class="text-black fs-4 fw-bold text-uppercase">Hazel</h3>
-          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit quae labore odit magnam in autem nesciunt, amet
-            deserunt</p>
-          <p class="fw-black text-primary fs-3">$299</p>
-          <button type="button" class="btn btn-dark w-100 ">Agregar al Carrito</button>
-        </div>
-      </div><!-- FIN GUITARRA -->
+      <Guitarra v-for="guitarra in guitarras" :guitarra="guitarra" @agregar-carrito="incrementar" />
+      <!-- FIN GUITARRA -->
     </div>
   </main>
 
