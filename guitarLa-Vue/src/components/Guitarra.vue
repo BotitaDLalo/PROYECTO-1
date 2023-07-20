@@ -16,7 +16,7 @@
       <button
         type="button"
         class="btn btn-dark w-100"
-        v-on:click="$emit('agregar-carrito', guitarra.id)"
+        v-on:click="$emit('agregar-carrito', guitarra)"
       >
         Agregar al Carrito
       </button>
