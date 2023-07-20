@@ -16,7 +16,6 @@ import Guitarra from './components/Guitarra.vue';
 // })
 // console.log(state.guitarras);
 
-
 //EJEMPLO DE REf
 // const guitar = ref([]);
 
@@ -31,8 +30,8 @@ onMounted(() => {
   guitarras.value = db
 })
 
-const incrementar = () => {
-  console.log('agregando...');
+const incrementar = (id) => {
+  console.log('agregando...',id);
 }
 
 
