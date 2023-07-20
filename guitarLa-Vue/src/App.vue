@@ -34,8 +34,19 @@ onMounted(() => {
 });
 
 const incrementar = (guitarra) => {
-  guitarra.cantidad = 1;
-  carrito.value.push(guitarra);
+  const existeCarrito = carrito.value.findIndex(
+    (producto) => producto.id === guitarra.id
+  );
+
+  console.log(existeCarrito);
+
+  if (existeCarrito >= 0) {
+    carrito.value[existeCarrito].cantidad++
+  } else {
+    guitarra.cantidad = 1;
+    carrito.value.push(guitarra);
+  }
+
   console.log("Agregando...");
   console.log(carrito.value);
 };
