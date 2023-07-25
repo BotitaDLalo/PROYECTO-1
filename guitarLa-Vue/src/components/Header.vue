@@ -1,12 +1,30 @@
 <script setup>
+import { computed } from "vue";
 const props = defineProps({
   carrito: {
     type: Array,
     required: true,
   },
+  guitarra: {
+    type: Object,
+    required: true,
+  },
 });
 
-defineEmits(["incrementar-cantidad", "decrementar-cantidad"]);
+defineEmits([
+  "incrementar-cantidad",
+  "decrementar-cantidad",
+  "agregar-carrito",
+  "eliminar-producto",
+  "vaciar-carrito",
+]);
+
+const totalPagar = computed(() => {
+  return props.carrito.reduce(
+    (total, producto) => total + producto.cantidad * producto.precio,
+    0
+  );
+});
 </script>
 <template>
   <header class="py-5 header">
@@ -43,7 +61,7 @@ defineEmits(["incrementar-cantidad", "decrementar-cantidad"]);
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="producto in carrito">
+                    <tr v-for="producto in carrito" :key="producto.id">
                       <td>
                         <img
                           class="img-fluid"
@@ -71,16 +89,25 @@ defineEmits(["incrementar-cantidad", "decrementar-cantidad"]);
                         </button>
                       </td>
                       <td>
-                        <button class="btn btn-danger" type="button">X</button>
+                        <button
+                          class="btn btn-danger"
+                          type="button"
+                          @click="$emit('eliminar-producto', producto.id)"
+                        >
+                          X
+                        </button>
                       </td>
                     </tr>
                   </tbody>
                 </table>
 
                 <p class="text-end">
-                  Total pagar: <span class="fw-bold">$899</span>
+                  Total pagar: <span class="fw-bold">{{ totalPagar }}</span>
                 </p>
-                <button class="btn btn-dark w-100 mt-3 p-2">
+                <button
+                  class="btn btn-dark w-100 mt-3 p-2"
+                  @click="$emit('vaciar-carrito')"
+                >
                   Vaciar Carrito
                 </button>
               </div>
@@ -92,17 +119,15 @@ defineEmits(["incrementar-cantidad", "decrementar-cantidad"]);
 
       <div class="row mt-5">
         <div class="col-md-6 text-center text-md-start pt-5">
-          <h1 class="display-2 fw-bold">Modelo VAI</h1>
+          <h1 class="display-2 fw-bold">Modelo {{ guitarra.nombre }}</h1>
           <p class="mt-5 fs-5 text-white">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus,
-            possimus quibusdam dolor nemo velit quo, fuga omnis, iure molestias
-            optio tempore sint at ipsa dolorum odio exercitationem eos inventore
-            odit.
+            {{ guitarra.descripcion }}
           </p>
           <p class="text-primary fs-1 fw-black">$399</p>
           <button
             type="button"
             class="btn fs-4 bg-primary text-white py-2 px-5"
+            @click="$emit('agregar-carrito', guitarra)"
           >
             Agregar al Carrito
           </button>

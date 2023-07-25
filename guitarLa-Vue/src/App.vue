@@ -1,6 +1,6 @@
 <script setup>
 import { db } from "./data/guitarras";
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 import Guitarra from "./components/Guitarra.vue";
 import Header from "./components/Header.vue";
 import Footer from "./components/Footer.vue";
@@ -28,10 +28,31 @@ import Footer from "./components/Footer.vue";
 
 const guitarras = ref([]);
 const carrito = ref([]);
+const guitarra = ref({});
+
+watch(
+  carrito,
+  () => {
+    guardarLocalStorage();
+  },
+  {
+    deep: true,
+  }
+);
 
 onMounted(() => {
   guitarras.value = db;
+  guitarra.value = db[3];
+
+  const carritoStorage = localStorage.getItem("carrito");
+  if (carritoStorage) {
+    carrito.value = JSON.parse(carritoStorage);
+  }
 });
+
+const guardarLocalStorage = () => {
+  localStorage.setItem("carrito", JSON.stringify(carrito.value));
+};
 
 const incrementar = (guitarra) => {
   const existeCarrito = carrito.value.findIndex(
@@ -47,6 +68,7 @@ const incrementar = (guitarra) => {
     carrito.value.push(guitarra);
   }
 
+  guardarLocalStorage();
   console.log("Agregando...");
   console.log(carrito.value);
 };
@@ -65,6 +87,15 @@ const incrementarCantidad = (id) => {
   carrito.value[index].cantidad++;
   console.log("Mas...");
   console.log(id);
+  console.log(carrito.value);
+};
+
+const eliminarProducto = (id) => {
+  carrito.value = carrito.value.filter((producto) => producto.id !== id);
+};
+
+const vaciarCarrito = () => {
+  carrito.value = [];
 };
 </script>
 
@@ -75,8 +106,12 @@ const incrementarCantidad = (id) => {
 <template>
   <Header
     :carrito="carrito"
+    :guitarra="guitarra"
     @incrementar-cantidad="incrementarCantidad"
     @decrementar-cantidad="decrementarCantidad"
+    @agregar-carrito="incrementar"
+    @eliminar-producto="eliminarProducto"
+    @vaciar-carrito="vaciarCarrito"
   />
 
   <main class="container-xl mt-5">
@@ -85,6 +120,7 @@ const incrementarCantidad = (id) => {
       <!--** @ por que es un evento -->
       <Guitarra
         v-for="guitarra in guitarras"
+        :key="guitarra.id"
         :guitarra="guitarra"
         @agregar-carrito="incrementar"
       />
